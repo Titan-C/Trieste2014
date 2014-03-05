@@ -51,22 +51,27 @@ class Bank(object):
         self.queue.add_customer(customer)
         print str(self.queue.size()) + 'customers in line'
 
-    def workday(self,working_minutes):
+    def find_free_server(self):
+        """Looks for availible cashiers"""
+
+
+    def workday(self, working_minutes):
         """Performs the time stepping for simulating a
            workday at the bank"""
-           
+
         while self.time < working_minutes:
-            try:
-                
+            pass
+
+
 
 def main():
     """Executes simulation"""
     ubs = Bank(2)
-    
+
     ubs.add_customer(Customer('mark', 2))
-    
+
     ubs.workday(60*8)
-    
+
 
 
 if __name__ == "__main__":
