@@ -10,9 +10,9 @@ class Customer(object):
         self.time = time
     def __repr__(self):
         return str(self.time)
-        
+
 class Queue(object):
-    server = Server()
+    server = None
     def __init__(self):
         self.customers = []
     def __gt__(self, other):
@@ -23,11 +23,11 @@ class Queue(object):
         else:
             self.customers.append(customer)
     def nextcustomer(self):
-        self.customers.pop(0)
-        
+        return self.customers.pop(0)
+
 class Generator(Event):
     """Simulates the arrival of customers"""
-    queue = Queue()
+    queue = None
     def execute(self, simulator):
         print 'new customer at t= ' + str(self.time)
         customer = Customer(simulator.time)
@@ -38,25 +38,27 @@ class Generator(Event):
 
 class Server(Event):
     """Simulates the cashier"""
-    queue = Queue()
+    queue = None
     def __init__(self):
         self.customerserved = None
-    
+
     def isfree(self):
         if self.customerserved == None:
             return True
-            
+
     def insert(self, simulator, customer):
         if self.customerserved != None:
             print 'Im busy with a customer'
         self.customerserved = customer
+        print 'receiving custormer['+str(customer)+'] at t= ' + str(simulator.time)
         self.time = simulator.time + 2.5
         simulator.insert(self)
-        
+
     def execute(self, simulator):
-        print 'served customer' + str(self.customerserved) + ' at t= ' + str(self.time)
+        print 'served customer[' + str(self.customerserved) + '] at t= ' + str(self.time)
         self.customerserved = None
         if self.queue > 0:
+            print 'hay clientes en cola'
             self.insert(simulator, self.queue.nextcustomer())
 
 class BankSimulator(Simulator):
@@ -65,11 +67,11 @@ class BankSimulator(Simulator):
         generator = Generator()
         queue = Queue()
         server = Server()
-        
+
         generator.queue = queue
         queue.server = server
         server.queue = queue
-        
+
         self.insert(generator)
         self.do_all_events()
 
