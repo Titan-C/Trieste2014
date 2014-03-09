@@ -8,7 +8,7 @@ from bisect import insort
 
 class Event(object):
     """Base Event class"""
-    def __init__(self, time):
+    def __init__(self, time=0):
         self.time = time
     def __lt__(self, other):
         return self.time < other.time
@@ -44,4 +44,5 @@ class Simulator(object):
         """Iterates over the entire events list"""
         while len(self.events.orderedlist) > 0:
             event = self.events.getfirst()
+            self.time = event.time
             event.execute(self)
