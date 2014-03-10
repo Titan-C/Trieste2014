@@ -1,5 +1,4 @@
-### ICTP Workshop on Advanced Techniques for Scientific Programming and Management 
-###of Open Source Software Packages
+### ICTP 2014  Workshop on Advanced Techniques for Scientific Programming 
 
 This repository contains my tutorials presented during this Workshop.
 
