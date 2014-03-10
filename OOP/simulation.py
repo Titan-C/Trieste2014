@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Mar 10 12:47:59 2014
-
-@author: oscar
+@author: Oscar Najera
+Starting template for tutorial
+Developed for the ICTP Workshop
 """
 
 from des_engine import Event, Simulator

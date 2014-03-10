@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 """
 @author: Oscar Najera
+Tutorial implementation initial solution
+Developed for the ICTP Workshop
 """
 from des_engine import Event, Simulator
 from numpy.random import exponential
 
 class Customer(object):
     """Contains the customer visiting the Bank"""
+
     def __init__(self, time):
         self.time = time
+
     def __repr__(self):
         return str(self.time)
 
+
 class Queue(object):
     """Waiting Queue in the Bank"""
+
     server = None
 
     def __init__(self):
@@ -35,9 +41,12 @@ class Queue(object):
         """Takes out the first in line customer"""
         return self.customers.pop(0)
 
-class Generator(Event):
+
+class NewArrival(Event):
     """Simulates the arrival of customers"""
+
     queue = None
+
     def __init__(self, time, maxtime):
         self.time = time
         self.maxtime = maxtime
@@ -51,9 +60,12 @@ class Generator(Event):
         if self.time < self.maxtime:
             simulator.insert(self)
 
+
 class Server(Event):
     """Simulates the cashier"""
+
     queue = None
+
     def __init__(self):
         self.customerserved = None
         self.time = 0
@@ -68,31 +80,34 @@ class Server(Event):
         if self.customerserved != None:
             print 'Already busy with a customer'
         self.customerserved = customer
-        print 'receiving customer['+str(customer)+'] at t= ' + str(simulator.time)
+        print 'receiving customer[', customer, '] at t=', simulator.time
         self.time = simulator.time + 2.5
         simulator.insert(self)
 
     def execute(self, simulator):
         """Completes serving customer and takes new one if waiting"""
-        print 'served customer[' + str(self.customerserved) + '] at t= ' + str(self.time)
+        print 'served customer[', self.customerserved, '] at t=', self.time
         self.customerserved = None
         if self.queue > 0:
             self.insert(simulator, self.queue.nextcustomer())
 
+
 class BankSimulator(Simulator):
     """Simulates the Workday of a Bank"""
+
     def run(self):
         """Runs simulation"""
-        generator = Generator(0, 30)
+        newarrival = NewArrival(0, 30)
         queue = Queue()
         server = Server()
 
-        generator.queue = queue
+        newarrival.queue = queue
         queue.server = server
         server.queue = queue
 
-        self.insert(generator)
+        self.insert(newarrival)
         self.do_all_events()
+
 
 if __name__ == "__main__":
     UBS = BankSimulator()
