@@ -9,4 +9,4 @@ Project website for the ICTP School
 
 [Slides](slidesOOP.html) 
 [Tutorial](https://github.com/Titan-C/Trieste2014/wiki/OOP-HandsOnSession)
-<a href="http://titan-c.github.io/Trieste2014/Downloads/file:///home/oscar/Trieste2014/Downloads/queue_simulation.zip" class="download-button zip"><span>Download</span></a>
+<a href="http://titan-c.github.io/Trieste2014/Downloads/queue_simulation.zip" class="download-button zip"><span>Download</span></a>
