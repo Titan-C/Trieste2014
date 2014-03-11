@@ -7,7 +7,7 @@ Developed for the ICTP Workshop
 from des_engine import Event, Simulator
 from numpy.random import exponential
 
-class Customer(object):
+class Customer(Event):
     """Contains the customer visiting the Bank"""
 
     def __init__(self, time):

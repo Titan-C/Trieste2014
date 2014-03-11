@@ -15,9 +15,6 @@ class Event(object):
     def __lt__(self, other):
         return self.time < other.time
 
-    def __eq__(self, other):
-        return self.time == other.time
-
 
 class EventsList(object):
     """Ordered set that runs whole event simulation"""
